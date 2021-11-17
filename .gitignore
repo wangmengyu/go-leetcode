@@ -1,0 +1,5 @@
+.idea
+vendor/
+bin/
+.DS_Store
+doc/.DS_Store
