@@ -30,13 +30,13 @@ func main() {
 
 	maxDay := 4
 	dp := make([][]int, len(shops)+1)
-	dpItems := make([][]map[string]int, len(shops)+1)
+	dpItems := make([][][]string, len(shops)+1)
 	for i := 0; i <= len(shops); i++ {
 		dp[i] = make([]int, 5)
-		dpItems[i] = make([]map[string]int, 5)
+		dpItems[i] = make([][]string, 5)
 		for j := 0; j <= 4; j++ {
 			dp[i][j] = 0
-			dpItems[i][j] = make(map[string]int)
+			dpItems[i][j] = make([]string, 0)
 		}
 	}
 
@@ -55,8 +55,8 @@ func main() {
 
 			if include > dp[i-1][j] {
 				dp[i][j] = include
-				dpItems[i][j] = dpItems[i-1][j-dayNums[i-1]]
-				dpItems[i][j][shops[i-1]] = 1
+
+				dpItems[i][j] = append(dpItems[i-1][j-dayNums[i-1]], shops[i-1])
 
 			}
 

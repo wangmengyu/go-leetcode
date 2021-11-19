@@ -15,15 +15,15 @@ func main() {
 	maxWeight := 4 // 背包总容量 4KG
 	// 行数据:每一种物品. 从上到下代表可选择的商品列表
 	dp := make([][]int, len(productSlice)+1)
-	selectItem := make([][]map[string]int, len(productSlice)+1)
+	selectItem := make([][][]string, len(productSlice)+1)
 
 	// 初始化表格
 	for i := 0; i < len(productSlice)+1; i++ {
 		dp[i] = make([]int, maxWeight+1)
-		selectItem[i] = make([]map[string]int, maxWeight+1)
+		selectItem[i] = make([][]string, maxWeight+1)
 		for j := 0; j < maxWeight+1; j++ {
 			dp[i][j] = 0
-			selectItem[i][j] = make(map[string]int)
+			selectItem[i][j] = make([]string, 0)
 		}
 	}
 	for i := 1; i <= len(productSlice); i++ {
@@ -41,9 +41,7 @@ func main() {
 				fmt.Printf("包含了我: %s\n", productSlice[i-1])
 				dp[i][j] = include // 刷新当前单元格最高价值
 				// 将包含商品设置成不包含我时的列表加上当前商品
-				newMap := selectItem[i-1][j-weightSlice[i-1]]
-				newMap[productSlice[i-1]] = 1
-				selectItem[i][j] = newMap
+				selectItem[i][j] = append(selectItem[i-1][j-weightSlice[i-1]], productSlice[i-1])
 			}
 		}
 	}
