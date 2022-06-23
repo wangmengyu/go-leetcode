@@ -62,22 +62,23 @@ func GetOpt(n int, taskList []TaskItem) int {
 	prev := Prev(n, taskList)
 	includeVal := taskList[n].Value
 	if prev > -1 {
-		fmt.Println(prev)
 		includeVal += GetOpt(prev, taskList)
 	}
 
 	// 不要当前
 	excludeVal := 0
 	if n-1 >= 0 {
+		// 有上一部
 		excludeVal = GetOpt(n-1, taskList)
 	} else {
+		// 没上一部,直接返回包含当前值的公式
+		fmt.Println("[return include n]", n)
 		return includeVal
 	}
 
-	fmt.Println("include:", includeVal)
-	fmt.Println("exclude:", excludeVal)
 	if includeVal > excludeVal {
 		return includeVal
 	}
+
 	return excludeVal
 }
