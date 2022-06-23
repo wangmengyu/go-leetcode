@@ -72,13 +72,15 @@ func GetOpt(n int, taskList []TaskItem) int {
 		excludeVal = GetOpt(n-1, taskList)
 	} else {
 		// 没上一部,直接返回包含当前值的公式
-		fmt.Println("[return include n]", n)
+		fmt.Println("[use include n]", n)
 		return includeVal
 	}
 
 	if includeVal > excludeVal {
+		fmt.Println("[use include n]", n)
 		return includeVal
 	}
 
+	fmt.Println("[use n-1]", n-1)
 	return excludeVal
 }
