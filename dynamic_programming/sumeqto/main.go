@@ -14,15 +14,17 @@ func main() {
 }
 
 func RecSubset(numList []int, i int, s int) bool {
-	if s == 0 { //
+	if s == 0 { //当结果正好满足时返回
 		return true
-	} else if i == 0 {
+	} else if i == 0 { // 当走到头了时候哦只有在当前值=剩余值的时候是true
 		return numList[i] == s // 两个数字必须相等. 否则和不同了.
-	} else if numList[i] > s {
-		// 当前位置的数已经大于总数.绝对不能选, 需要跳过当前节点
-		return RecSubset(numList, i-1, s)
 	} else {
-		// 有两种可能. 选和不选
+		// 走到一半,
+		if numList[i] > s {
+			// 只能不选
+			return RecSubset(numList, i-1, s)
+		}
+		// 比现在值小或者等于, 有两种可能. 选和不选
 		// 选:
 		A := RecSubset(numList, i-1, s-numList[i]) // 选:的时候总值要-1
 		B := RecSubset(numList, i-1, s)            // 不选: 总值不用 -1
