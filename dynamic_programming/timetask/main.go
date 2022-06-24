@@ -38,9 +38,9 @@ func main() {
 		},
 	}
 
-	res := GetOpt(7, taskList)
+	res := GetOpt(6, taskList)
 	fmt.Println(res)
-	fmt.Println(taskList[7].Path)
+	fmt.Println(taskList[6].Path)
 }
 
 func Prev(n int, taskList []TaskItem) int {
@@ -103,6 +103,7 @@ func GetOpt(n int, taskList []TaskItem) int {
 
 		return includeVal
 	}
+	//  取exclude,  prev的path
 	taskList[n].Path = taskList[n-1].Path
 	fmt.Println("[use n-1]", n-1)
 	return excludeVal
